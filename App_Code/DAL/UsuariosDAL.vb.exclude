@@ -1,0 +1,38 @@
+﻿Imports Microsoft.ApplicationBlocks.Data
+Imports ingNovar.Utilidades2
+
+Public Class UsuariosDAL
+
+    Public Shared Function Insertar(ByVal Login As String, ByVal Contrasena As String, ByVal Nombre_Completo As String, ByVal Activo As Boolean, ByVal fecha_creacion As Date, ByVal id_usuario_creacion As Integer, ByVal fecha_modificacion As Date, ByVal id_usuario_modificacion As Integer) As Int32
+        Return SqlHelper.ExecuteScalar(strCadenaConexion, "dbo.UsuariosInsertar", isNothingToDBNull(Login), isNothingToDBNull(Contrasena), isNothingToDBNull(Nombre_Completo), isNothingToDBNull(Activo), isNothingToDBNull(fecha_creacion), isNothingToDBNull(id_usuario_creacion), isNothingToDBNull(fecha_modificacion), isNothingToDBNull(id_usuario_modificacion))
+    End Function
+
+    Public Shared Sub Actualizar(ByVal Id As Int32, ByVal Login As String, ByVal Contrasena As String, ByVal Nombre_Completo As String, ByVal Activo As Boolean, ByVal fecha_creacion As Date, ByVal id_usuario_creacion As Integer, ByVal fecha_modificacion As Date, ByVal id_usuario_modificacion As Integer)
+        SqlHelper.ExecuteNonQuery(strCadenaConexion, "dbo.UsuariosActualizar", Id, isNothingToDBNull(Login), isNothingToDBNull(Contrasena), isNothingToDBNull(Nombre_Completo), isNothingToDBNull(Activo), isNothingToDBNull(fecha_creacion), isNothingToDBNull(id_usuario_creacion), isNothingToDBNull(fecha_modificacion), isNothingToDBNull(id_usuario_modificacion))
+    End Sub
+
+    Public Shared Sub Eliminar(ByVal Id As Int32)
+        SqlHelper.ExecuteScalar(strCadenaConexion, "dbo.UsuariosEliminar", Id)
+    End Sub
+
+    Public Shared Function CargarTodos() As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.UsuariosConsultarTodos")
+    End Function
+
+    Public Shared Function CargarPorID(ByVal Id As Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.UsuariosConsultarPorID", Id)
+    End Function
+
+    Public Shared Function CargarPorID_usuario_creacion(ByVal Id As Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.UsuariosConsultarPorID_usuario_creacion", Id)
+    End Function
+
+    Public Shared Function CargarPorID_usuario_Modificacion(ByVal Id As Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.UsuariosConsultarPorID_usuario_Modificacion", Id)
+    End Function
+
+    Public Shared Function CargarPorLoginyContrasena(ByVal login As String, ByVal contrasena As String) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.UsuariosConsultarPorLoginyContrasena", login, contrasena)
+    End Function
+End Class
+

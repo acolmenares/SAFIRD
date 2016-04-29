@@ -1,0 +1,308 @@
+﻿Imports ingNovar.Utilidades2
+imports system.data
+Imports system.Collections.generic
+Imports System.Security.Cryptography
+
+Partial Public Class UsuariosBrl
+
+    Private _Id As Int32
+    Private _Login As String
+    Private _Contrasena As String
+    Private _Nombre_Completo As String
+    Private _Activo As Boolean
+    Private _Fecha_Creacion As DateTime
+    Private _Id_Usuario_Creacion As Int32
+    Private _Fecha_Modificacion As DateTime
+    Private _Id_Usuario_Modificacion As Int32
+
+    Private objListEntradasUsuarioCreacion As List(Of EntradasBrl)
+    Private objListEntradasUsuarioModificacion As List(Of EntradasBrl)
+    Private objListEntradasUsuarioRecibio As List(Of EntradasBrl)
+
+	Public Event Creating()
+    Public Event Created()
+    
+    Public Sub New()
+        RaiseEvent Creating()
+        'Adicionar código al costructor aquí
+        
+        RaiseEvent Created()        
+    End Sub
+    Public Event IDChanging(ByVal Value As Int32)
+    Public Event IDChanged()
+	
+    Public Property ID() As Int32
+        Get
+            Return Me._Id
+        End Get
+        Set(ByVal Value As Int32)
+            If _Id <> Value Then
+                RaiseEvent IDChanging(Value)
+				Me._Id = Value
+                RaiseEvent IDChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event LoginChanging(ByVal Value As String)
+    Public Event LoginChanged()
+	
+    Public Property Login() As String
+        Get
+            Return Me._Login
+        End Get
+        Set(ByVal Value As String)
+            If _Login <> Value Then
+                RaiseEvent LoginChanging(Value)
+				Me._Login = Value
+                RaiseEvent LoginChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event ContrasenaChanging(ByVal Value As String)
+    Public Event ContrasenaChanged()
+	
+    Public Property Contrasena() As String
+        Get
+            Return Me._Contrasena
+        End Get
+        Set(ByVal Value As String)
+            If _Contrasena <> Value Then
+                RaiseEvent ContrasenaChanging(Value)
+				Me._Contrasena = Value
+                RaiseEvent ContrasenaChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event Nombre_CompletoChanging(ByVal Value As String)
+    Public Event Nombre_CompletoChanged()
+	
+    Public Property Nombre_Completo() As String
+        Get
+            Return Me._Nombre_Completo
+        End Get
+        Set(ByVal Value As String)
+            If _Nombre_Completo <> Value Then
+                RaiseEvent Nombre_CompletoChanging(Value)
+				Me._Nombre_Completo = Value
+                RaiseEvent Nombre_CompletoChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event ActivoChanging(ByVal Value As Boolean)
+    Public Event ActivoChanged()
+	
+    Public Property Activo() As Boolean
+        Get
+            Return Me._Activo
+        End Get
+        Set(ByVal Value As Boolean)
+            If _Activo <> Value Then
+                RaiseEvent ActivoChanging(Value)
+				Me._Activo = Value
+                RaiseEvent ActivoChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event Fecha_CreacionChanging(ByVal Value As DateTime)
+    Public Event Fecha_CreacionChanged()
+	
+    Public Property Fecha_Creacion() As DateTime
+        Get
+            Return Me._Fecha_Creacion
+        End Get
+        Set(ByVal Value As DateTime)
+            If _Fecha_Creacion <> Value Then
+                RaiseEvent Fecha_CreacionChanging(Value)
+				Me._Fecha_Creacion = Value
+                RaiseEvent Fecha_CreacionChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event Id_Usuario_CreacionChanging(ByVal Value As Int32)
+    Public Event Id_Usuario_CreacionChanged()
+	
+    Public Property Id_Usuario_Creacion() As Int32
+        Get
+            Return Me._Id_Usuario_Creacion
+        End Get
+        Set(ByVal Value As Int32)
+            If _Id_Usuario_Creacion <> Value Then
+                RaiseEvent Id_Usuario_CreacionChanging(Value)
+				Me._Id_Usuario_Creacion = Value
+                RaiseEvent Id_Usuario_CreacionChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event Fecha_ModificacionChanging(ByVal Value As DateTime)
+    Public Event Fecha_ModificacionChanged()
+	
+    Public Property Fecha_Modificacion() As DateTime
+        Get
+            Return Me._Fecha_Modificacion
+        End Get
+        Set(ByVal Value As DateTime)
+            If _Fecha_Modificacion <> Value Then
+                RaiseEvent Fecha_ModificacionChanging(Value)
+				Me._Fecha_Modificacion = Value
+                RaiseEvent Fecha_ModificacionChanged()
+            End If
+        End Set
+    End Property
+
+    Public Event Id_Usuario_ModificacionChanging(ByVal Value As Int32)
+    Public Event Id_Usuario_ModificacionChanged()
+	
+    Public Property Id_Usuario_Modificacion() As Int32
+        Get
+            Return Me._Id_Usuario_Modificacion
+        End Get
+        Set(ByVal Value As Int32)
+            If _Id_Usuario_Modificacion <> Value Then
+                RaiseEvent Id_Usuario_ModificacionChanging(Value)
+				Me._Id_Usuario_Modificacion = Value
+                RaiseEvent Id_Usuario_ModificacionChanged()
+            End If
+        End Set
+    End Property
+
+    Public Property EntradasUsuario_Creacion() As List(Of EntradasBrl)
+        Get
+            If (Me.objListEntradasUsuarioCreacion Is Nothing) Then
+                objListEntradasUsuarioCreacion = EntradasBrl.CargarPorId_Usuario_Creacion(Me.ID)
+            End If
+            Return Me.objListEntradasUsuarioCreacion
+        End Get
+        Set(ByVal Value As List(Of EntradasBrl))
+            Me.objListEntradasUsuarioCreacion = Value
+        End Set
+    End Property
+
+    Public Property EntradasUsuario_Modificacion() As List(Of EntradasBrl)
+        Get
+            If (Me.objListEntradasUsuarioModificacion Is Nothing) Then
+                objListEntradasUsuarioModificacion = EntradasBrl.CargarPorId_Usuario_Modificacion(Me.ID)
+            End If
+            Return Me.objListEntradasUsuarioModificacion
+        End Get
+        Set(ByVal Value As List(Of EntradasBrl))
+            Me.objListEntradasUsuarioModificacion = Value
+        End Set
+    End Property
+
+    Public Property EntradasUsuario_Recibio() As List(Of EntradasBrl)
+        Get
+            If (Me.objListEntradasUsuarioRecibio Is Nothing) Then
+                objListEntradasUsuarioRecibio = EntradasBrl.CargarPorId_Usuario_Recibio(Me.ID)
+            End If
+            Return Me.objListEntradasUsuarioRecibio
+        End Get
+        Set(ByVal Value As List(Of EntradasBrl))
+            Me.objListEntradasUsuarioRecibio = Value
+        End Set
+    End Property
+
+    Private Shared Function asignarValoresALasPropiedades(ByVal fila As DataRow) As UsuariosBrl
+
+        Dim objUsuarios As New UsuariosBrl
+
+        With objUsuarios
+            .ID = fila("Id")
+            .Login = isDBNullToNothing(fila("Login"))
+            .Contrasena = isDBNullToNothing(fila("Contrasena"))
+            .Nombre_Completo = isDBNullToNothing(fila("Nombre_Completo"))
+            .Activo = isDBNullToNothing(fila("Activo"))
+            .Fecha_Creacion = isDBNullToNothing(fila("Fecha_Creacion"))
+            .Id_Usuario_Creacion = isDBNullToNothing(fila("Id_Usuario_Creacion"))
+            .Fecha_Modificacion = isDBNullToNothing(fila("Fecha_Modificacion"))
+            .Id_Usuario_Modificacion = isDBNullToNothing(fila("Id_Usuario_Modificacion"))
+
+        End With
+
+        Return objUsuarios
+
+    End Function
+	
+	Public Shared Event LoadingUsuariosList(ByVal LoadType As String)
+	Public Shared Event LoadedUsuariosList(target As List(Of UsuariosBrl), ByVal LoadType As String)
+	
+	Public Shared Function CargarTodos() As List(Of UsuariosBrl)
+
+		Dim dsDatos As System.Data.DataSet
+		Dim lista As New List(Of UsuariosBrl)
+	
+		RaiseEvent LoadingUsuariosList("CargarTodos")
+	
+		dsDatos = UsuariosDAL.CargarTodos()
+
+        For Each fila as DataRow in dsDatos.Tables(0).Rows
+			lista.Add(asignarValoresALasPropiedades(fila))
+        Next
+        
+        RaiseEvent LoadedUsuariosList(lista, "CargarTodos")
+        
+        Return lista
+        
+    End Function
+
+	Public Shared Event CargandoPorId(ByVal id As Int32)
+    Public Shared Event CargadoPorId(ByVal target As UsuariosBrl)
+
+	Public Shared Function CargarPorID(ID As Int32) As UsuariosBrl
+
+		Dim dsDatos As System.Data.DataSet
+		Dim objUsuarios As UsuariosBrl = Nothing 
+        RaiseEvent CargandoPorId(ID)
+        dsDatos = UsuariosDAL.CargarPorID(ID)
+        If dsDatos.Tables(0).Rows.Count <> 0 Then objUsuarios = asignarValoresALasPropiedades(dsDatos.Tables(0).Rows(0))
+        Return objUsuarios
+        
+    End Function
+
+	Public Shared Function CargarPorId_Usuario_Creacion(ByVal Id_Usuario_Creacion As Int32) As List(Of UsuariosBrl)
+
+		Dim dsDatos As System.Data.DataSet
+		Dim lista As New List(Of UsuariosBrl)
+        RaiseEvent LoadingUsuariosList("CargarPorId_Usuario_Creacion")
+        dsDatos = UsuariosDAL.CargarPorID_usuario_creacion(Id_Usuario_Creacion)
+        For Each fila As DataRow In dsDatos.Tables(0).Rows
+            lista.Add(asignarValoresALasPropiedades(fila))
+        Next
+        RaiseEvent LoadedUsuariosList(lista, "CargarPorId_Usuario_Creacion")
+        
+        Return lista
+        
+	End Function
+
+    Public Shared Function CargarPorId_Usuario_Modificacion(ByVal Id_Usuario_Modificacion As Int32) As List(Of UsuariosBrl)
+
+        Dim dsDatos As System.Data.DataSet
+        Dim lista As New List(Of UsuariosBrl)
+
+        RaiseEvent LoadingUsuariosList("CargarPorId_Usuario_Modificacion")
+        dsDatos = UsuariosDAL.CargarPorID_usuario_Modificacion(Id_Usuario_Modificacion)
+        For Each fila As DataRow In dsDatos.Tables(0).Rows
+            lista.Add(asignarValoresALasPropiedades(fila))
+        Next
+        RaiseEvent LoadedUsuariosList(lista, "CargarPorId_Usuario_Modificacion")
+        Return lista
+
+    End Function
+
+    Public Shared Function CargarPorLoginyContrasena(ByVal login As String, ByVal contrasena As String) As UsuariosBrl
+
+        Dim dsDatos As System.Data.DataSet
+        Dim objUsuarios As UsuariosBrl = Nothing
+        dsDatos = UsuariosDAL.CargarPorLoginyContrasena(login, contrasena)
+        If dsDatos.Tables(0).Rows.Count <> 0 Then objUsuarios = asignarValoresALasPropiedades(dsDatos.Tables(0).Rows(0))
+        Return objUsuarios
+    End Function
+End Class
+
+

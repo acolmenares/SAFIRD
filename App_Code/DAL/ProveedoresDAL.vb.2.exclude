@@ -1,0 +1,43 @@
+﻿Imports Microsoft.ApplicationBlocks.Data
+Imports ingNovar.Utilidades2
+
+Public Class ProveedoresDAL
+
+    Public Shared Function Insertar(ByVal Razon_Social As String, ByVal Id_Tipo_Identificacion As Int32, ByVal Identificacion As String, ByVal Observaciones As String, ByVal Fecha_Creacion As DateTime, ByVal Id_Usuario_Creacion As Int32, ByVal Fecha_Modificacion As DateTime, ByVal Id_Usuario_Modificacion As Int32) As Int32
+        Return SqlHelper.ExecuteScalar(strCadenaConexion, "dbo.ProveedoresInsertar", isNothingToDBNull(Razon_Social), isNothingToDBNull(Id_Tipo_Identificacion), isNothingToDBNull(Identificacion), isNothingToDBNull(Observaciones), isNothingToDBNull(Fecha_Creacion), isNothingToDBNull(Id_Usuario_Creacion), isNothingToDBNull(Fecha_Modificacion), isNothingToDBNull(Id_Usuario_Modificacion))
+    End Function
+
+    Public Shared Sub Actualizar(ByVal Id As Int32, ByVal Razon_Social As String, ByVal Id_Tipo_Identificacion As Int32, ByVal Identificacion As String, ByVal Observaciones As String, ByVal Fecha_Creacion As DateTime, ByVal Id_Usuario_Creacion As Int32, ByVal Fecha_Modificacion As DateTime, ByVal Id_Usuario_Modificacion As Int32)
+        SqlHelper.ExecuteNonQuery(strCadenaConexion, "dbo.ProveedoresActualizar", Id, isNothingToDBNull(Razon_Social), isNothingToDBNull(Id_Tipo_Identificacion), isNothingToDBNull(Identificacion), isNothingToDBNull(Observaciones), isNothingToDBNull(Fecha_Creacion), isNothingToDBNull(Id_Usuario_Creacion), isNothingToDBNull(Fecha_Modificacion), isNothingToDBNull(Id_Usuario_Modificacion))
+    End Sub
+
+    Public Shared Sub Eliminar(ByVal Id As Int32)
+        SqlHelper.ExecuteScalar(strCadenaConexion, "dbo.ProveedoresEliminar", Id)
+    End Sub
+
+    Public Shared Function CargarTodos() As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.ProveedoresConsultarTodos")
+    End Function
+
+    Public Shared Function CargarPorID(ByVal Id As Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.ProveedoresConsultarPorID", Id)
+    End Function
+    
+    Public Shared Function CargarPorId_Tipo_Identificacion(ByVal Id_Tipo_Identificacion As System.Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.ProveedoresConsultarPorId_Tipo_Identificacion", Id_Tipo_Identificacion)
+    End Function
+
+
+    Public Shared Function CargarPorId_Usuario_Creacion(ByVal Id_Usuario_Creacion As System.Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.ProveedoresConsultarPorId_Usuario_Creacion", Id_Usuario_Creacion)
+    End Function
+
+
+    Public Shared Function CargarPorId_Usuario_Modificacion(ByVal Id_Usuario_Modificacion As System.Int32) As System.Data.DataSet
+        Return SqlHelper.ExecuteDataset(strCadenaConexion, "dbo.ProveedoresConsultarPorId_Usuario_Modificacion", Id_Usuario_Modificacion)
+    End Function
+
+
+
+End Class
+
