@@ -85,7 +85,8 @@
                                                         <asp:DropDownList ID="ddl_proyecto" runat="server" Width="142px">
                                                             <asp:ListItem Value="1">PRM V</asp:ListItem>
                                                             <asp:ListItem Value="2">PRM VI</asp:ListItem>
-                                                            <asp:ListItem Selected="True" Value="7">PRM VII</asp:ListItem>
+                                                            <asp:ListItem Selected="True" Value="3">PRM VIII</asp:ListItem>
+                                                            <asp:ListItem  Value="7">PRM VII</asp:ListItem>
                                                         </asp:DropDownList></td>
                                                 </tr>
                                                 <tr>

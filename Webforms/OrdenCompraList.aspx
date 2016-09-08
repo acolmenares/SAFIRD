@@ -138,7 +138,7 @@
                                     <ItemStyle Width="20px" HorizontalAlign="Center" />
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True"
-                                    SortExpression="Id" UniqueName="Id" Visible="False">
+                                    SortExpression="Id" UniqueName="Id" Display="False">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Fecha" DataType="System.DateTime" HeaderText="Fecha"
                                     DataFormatString="{0:dd/MMM/yyyy}" SortExpression="Fecha" UniqueName="Fecha">

@@ -191,7 +191,7 @@
                                     </telerik:GridTemplateColumn>                                
                                                                                 
                                     <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True"
-                                        SortExpression="Id" UniqueName="Id"  Visible ="False">
+                                        SortExpression="Id" UniqueName="Id"  Display ="False">
                                     </telerik:GridBoundColumn>
                                     
                                     <telerik:GridBoundColumn DataField="Nivel.Descripcion_PadreHijo" HeaderText="R. Presupuestal" SortExpression="Nivel.Descripcion_PadreHijo"

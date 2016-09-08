@@ -48,7 +48,7 @@ Partial Class OrdenCompra
 
             ' asignando los permisos
 
-            If Request.QueryString.Item("Id") > 0 Then  ' va a editar
+            If ValorRecibido("Id") > 0 Then  ' va a editar
                 btnGuardar.Enabled = objper_perfil.Peditar
                 btnGuardarOtro.Enabled = objper_perfil.Peditar
             Else
@@ -75,7 +75,7 @@ Partial Class OrdenCompra
 
             ' asignando los permisos
 
-            If Request.QueryString.Item("Id") > 0 Then  ' va a editar
+            If ValorRecibido("Id") > 0 Then  ' va a editar
                 btnGuardar.Enabled = objper_usuario.Peditar
                 btnGuardarOtro.Enabled = objper_usuario.Peditar
             Else
@@ -127,7 +127,7 @@ Partial Class OrdenCompra
         Lbl_perfil = Master.FindControl("Lbl_perfil")
         Lbl_perfil.Text = Session("NombrePerfil")
 
-        If Request.QueryString.Item("Mensaje") = 1 Then
+        If ValorRecibido("Mensaje") = 1 Then
             lblMensaje.Text = "Operación exitosa"
             lblMensaje.Visible = True
         End If
@@ -151,8 +151,8 @@ Partial Class OrdenCompra
 
         Dim ListOrdenCompra_Detalle As List(Of OrdenCompra_DetalleBrl) = Session("ListOrdenCompra_Detalle")
 
-        If Request.QueryString.Item("Refrescar") = 1 Then
-            Dim objOrdenCompra As OrdenCompraBrl = OrdenCompraBrl.CargarPorID(Request.QueryString.Item("ID"))
+        If ValorRecibido("Refrescar") = 1 Then
+            Dim objOrdenCompra As OrdenCompraBrl = OrdenCompraBrl.CargarPorID(ValorRecibido("ID"))
 
             If objOrdenCompra Is Nothing Then
                 lblMensaje.Text = "Registro no existe"
@@ -184,7 +184,7 @@ Partial Class OrdenCompra
             '
 
             'si no hay una variable de sesión con la lista.
-            If ListOrdenCompra_Detalle Is Nothing Or Request.QueryString.Item("Refrescar") = 1 Then
+            If ListOrdenCompra_Detalle Is Nothing Or ValorRecibido("Refrescar") = 1 Then
                 ListOrdenCompra_Detalle = objOrdenCompra.OrdenCompra_Detalle
                 Session("ListOrdenCompra_Detalle") = ListOrdenCompra_Detalle
             End If
@@ -192,7 +192,7 @@ Partial Class OrdenCompra
             ' cargando las retenciones
             cargarretenciones()
 
-            If Request.QueryString.Item("Editar") = 0 Then
+            If ValorRecibido("Editar") = 0 Then
                 btnGuardar.Enabled = False
                 btnGuardarOtro.Enabled = False
                 btnEliminar.Enabled = False
@@ -259,7 +259,7 @@ Partial Class OrdenCompra
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Session.Remove("OrdenCompra")
-        If Request.QueryString.Item("TA") >= 1 Then
+        If ValorRecibido("TA") >= 1 Then
             Response.Redirect("OrdenCompraAprobarList.aspx?TA=" & Request.QueryString.Item("TA"))
         End If
         Response.Redirect("OrdenCompraList.aspx")
@@ -267,10 +267,10 @@ Partial Class OrdenCompra
 
     Private Function Grabar() As Int32
 
-        Dim objOrdenCompra As OrdenCompraBRL
+        Dim objOrdenCompra As OrdenCompraBrl
 
-        If Request.QueryString.Item("Refrescar") = 1 Then
-            objOrdenCompra = OrdenCompraBrl.CargarPorID(Request.QueryString.Item("ID"))
+        If ValorRecibido("Refrescar") = 1 Then
+            objOrdenCompra = OrdenCompraBrl.CargarPorID(ValorRecibido("ID"))
             objOrdenCompra.Fecha_Modificacion = Now
             objOrdenCompra.Id_Usuario_Modificacion = CType(Master.FindControl("lblidusuario"), Label).Text
         Else
@@ -308,8 +308,8 @@ Partial Class OrdenCompra
         Dim objOrdenCompra As OrdenCompraBrl
 
         Try
-            If Request.QueryString.Item("Editar") = 1 Then
-                objOrdenCompra = OrdenCompraBrl.CargarPorID(Request.QueryString.Item("ID"))
+            If ValorRecibido("Editar") = 1 Then
+                objOrdenCompra = OrdenCompraBrl.CargarPorID(ValorRecibido("ID"))
                 objOrdenCompra.Eliminar()
                 Response.Redirect("OrdenCompra.aspx?Mensaje=1")
             End If
@@ -361,12 +361,12 @@ Partial Class OrdenCompra
         Dim objretencion As OrdenCompra_RetencionBrl
         If lbl_IdRet.Text = "" Then
             objretencion = New OrdenCompra_RetencionBrl
-            objretencion.Id_OrdenCompra = Request.QueryString.Item("Id")
+            objretencion.Id_OrdenCompra = ValorRecibido("Id")
         Else
             objretencion = OrdenCompra_RetencionBrl.CargarPorID(lbl_IdRet.Text)
             If objretencion Is Nothing Then
                 objretencion = New OrdenCompra_RetencionBrl
-                objretencion.Id_OrdenCompra = Request.QueryString.Item("Id")
+                objretencion.Id_OrdenCompra = ValorRecibido("Id")
             End If
         End If
 
@@ -383,7 +383,7 @@ Partial Class OrdenCompra
 
     Protected Sub cargarretenciones()
         Dim Listretenciones As New List(Of OrdenCompra_RetencionBrl)
-        Listretenciones = OrdenCompra_RetencionBrl.CargarPorId_OrdenCompra(Request.QueryString.Item("Id"))
+        Listretenciones = OrdenCompra_RetencionBrl.CargarPorId_OrdenCompra(ValorRecibido("Id"))
         Session("ListaRetenciones") = Listretenciones
         dg_Retenciones.DataSource = Listretenciones
         dg_Retenciones.DataBind()
@@ -392,7 +392,7 @@ Partial Class OrdenCompra
         ' Sacando el valor de la factura
         '
         Dim wvalor As Double
-        Dim objOrdenCompra As OrdenCompraBrl = OrdenCompraBrl.CargarPorID(Request.QueryString.Item("Id"))
+        Dim objOrdenCompra As OrdenCompraBrl = OrdenCompraBrl.CargarPorID(ValorRecibido("Id"))
         If objOrdenCompra Is Nothing Then wvalor = 0 Else wvalor = objOrdenCompra.ValorOrdenCompra - objOrdenCompra.ValorRetencionOrdenCompra
 
         Lbl_ValorFinal.Text = Format(wvalor, "C")
@@ -440,7 +440,7 @@ Partial Class OrdenCompra
 
     Protected Sub dg_Retenciones_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.DataGridItemEventArgs) Handles dg_Retenciones.ItemDataBound
         If e.Item.ItemType = ListItemType.AlternatingItem Or e.Item.ItemType = ListItemType.Item Then
-            If Request.QueryString.Item("Editar") = 0 Then
+            If ValorRecibido("Editar") = 0 Then
                 Dim btneliminarben As ImageButton
                 btneliminarben = e.Item.FindControl("btneliminarben")
                 btneliminarben.Visible = False
@@ -455,7 +455,7 @@ Partial Class OrdenCompra
 
     Protected Sub Rg_Listado_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs) Handles Rg_Listado.ItemDataBound
         If e.Item.ItemType = Telerik.Web.UI.GridItemType.AlternatingItem Or e.Item.ItemType = Telerik.Web.UI.GridItemType.Item Then
-            If Request.QueryString.Item("Editar") = 0 Then
+            If ValorRecibido("Editar") = 0 Then
                 Dim btneliminarben As ImageButton
                 btneliminarben = e.Item.FindControl("btneliminarben")
                 btneliminarben.Visible = False
@@ -477,7 +477,7 @@ Partial Class OrdenCompra
     End Sub
 
     Protected Sub btn_actualizar_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btn_actualizar.Click
-        If Request.QueryString.Item("Id") > 0 Then
+        If ValorRecibido("Id") > 0 Then
             Response.Redirect("../webforms/OrdenCompra.aspx?Editar=1&Refrescar=1&Id=" + Request.QueryString.Item("Id"))
         Else
             btn_nuevo_Click(sender, e)
@@ -485,7 +485,7 @@ Partial Class OrdenCompra
     End Sub
 
     Protected Sub btn_Imprimir_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btn_Imprimir.Click
-        If Request.QueryString.Item("Refrescar") = 1 Then
+        If ValorRecibido("Refrescar") = 1 Then
             If txtNumero.Text <> "" Then
                 Dim rpURL As String = "OrdenCompraReporte.aspx?No=" + txtNumero.Text
                 ScriptManager.RegisterStartupScript(Page, GetType(Page), "Ventana", "<script language='JavaScript'> var ventana = window.open('" + rpURL + "','_reportes','toolbar=no,status=yes,menubar=no,location=no,scrollbars=yes,resizable=yes,width=900,height=600'); ventana.focus();</script>", False)
@@ -559,6 +559,12 @@ Partial Class OrdenCompra
             End Try
         End If
     End Sub
+
+    Private Function ValorRecibido(ByVal identificador As String) As Int32
+        Dim valor As Int32 = 0
+        Int32.TryParse(Request.QueryString.Item(identificador), valor)
+        Return valor
+    End Function
 End Class
 
 
