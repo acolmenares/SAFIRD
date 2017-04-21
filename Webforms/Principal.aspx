@@ -6,7 +6,7 @@
     <uc1:Menu id="Menu1" runat="server"/>
     <asp:Panel runat="server" ID="pnl_principal" DefaultButton ="" Width ="100%">
     <table id="table1" border="0" cellpadding="0" cellspacing="0" style="width: 100%">
-        <tr valign="top">
+        <tr valign="top" style="visibility:hidden;">
             <td align="center" colspan="2" rowspan="2" valign="middle" style="width: 50%">
                 <div class="TitContenido" >
                     <asp:Image ID="Image1" runat="server" Height="70%" ImageUrl="~/Images/siluetacolombia.jpg"
@@ -31,7 +31,7 @@
                         text-align: center" Width="240px" />&nbsp;</div>
             </td>
         </tr>
-        <tr valign="top">
+        <tr valign="top" style="visibility:hidden;">
             <td style="width: 25%;" align="center" valign="middle">
                 <div class="TitContenido" style="left: 0px; width: 250px; top: 0px;">
                     <asp:Image ID="ImgFoto02" runat="server" ImageUrl="~/Images/foto01.jpg" Style="vertical-align: middle;
@@ -57,9 +57,43 @@
             <td colspan="4">
                 <div style="left: 0px; vertical-align: middle; width: 100%; text-align: center">
                     <hr />
-                    <table id="tblanuncio" runat="server" border="0" cellpadding="0" cellspacing="0"
-                        style="vertical-align: middle; text-align: center" width="90%">
+                    <table  border="0" cellpadding="0" cellspacing="0"
+                        style="vertical-align: middle; text-align: center" width="90%" >
+                        <tr valign="top" >
+                            <td align="center" valign="top">
+                                <asp:Label  runat="server" CssClass="lblanuncio" Text="Nombre Empresa:"></asp:Label>
+                                <asp:Label  runat="server" CssClass="lblanuncio" ForeColor="Maroon" Text="BLUMONT"></asp:Label>
+                                <asp:Label  runat="server" Text=" - "></asp:Label>
+                                <asp:Label  runat="server" CssClass="lblanuncio" Text="Página WEB:"></asp:Label>
+                                <asp:HyperLink  runat="server" CssClass="lblanuncio" ForeColor="Maroon">http://blumont.org</asp:HyperLink>
+                                <asp:Label  runat="server" Text=" - "></asp:Label>
+                                <asp:Label runat="server" CssClass="lblanuncio" Text="Correo Electrónico:"></asp:Label>
+                                <asp:HyperLink runat="server" CssClass="lblanuncio" ForeColor="Maroon">acolmenares@blumont.org</asp:HyperLink>
+                            </td>
+                        </tr>
                         <tr valign="top">
+                            <td align="center" style="height: 16px" valign="top">
+                                <asp:Label  runat="server" CssClass="lblanuncio" Text="Teléfono:"></asp:Label>
+                                <asp:Label  runat="server" CssClass="lblanuncio" ForeColor="Maroon" Text="(571) 7446670 extensión 103"></asp:Label>
+                                <asp:Label  runat="server" Text=" - "></asp:Label>
+                                <asp:Label  runat="server" CssClass="lblanuncio" Text="Dirección:"></asp:Label>
+                                <asp:Label  runat="server" CssClass="lblanuncio" ForeColor="Maroon" Text="Carrera 19C # 86A-43 Oficina 201 Bogota-Colombia"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <td align="center" valign="top">
+                                <asp:Label runat="server" CssClass="lblanuncio" Text="Nota:"></asp:Label>
+                                <asp:Label runat="server" CssClass="lblanuncio" ForeColor="Maroon"  Text="Blumont SAF"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>    
+
+
+
+
+                    <table id="tblanuncio" runat="server" border="0" cellpadding="0" cellspacing="0"
+                        style="vertical-align: middle; text-align: center" width="90%" hidden >
+                        <tr valign="top" >
                             <td align="center" valign="top">
                                 <asp:Label ID="lblnombre" runat="server" CssClass="lblanuncio" Text="Nombre Empresa:"></asp:Label>
                                 <asp:Label ID="lblnombre1" runat="server" CssClass="lblanuncio" ForeColor="Maroon"></asp:Label>

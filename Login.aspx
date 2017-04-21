@@ -7,7 +7,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
    <meta name="author" content="Ricardo Ortiz"/>
    <meta name="description" content="Operaciones y Monitoreo"/>
-   <title>Contact - SAFIRD</title>
+   <title>Blumont - SAF</title>
    <link rel="stylesheet" type="text/css" media="all" href="Styles/main1.css"/>
    <link rel="stylesheet" type="text/css" media="all" href="colorschemes/colorscheme9/colorscheme.css"/>
    <link rel="stylesheet" type="text/css" media="all" href="Styles/style1.css"/>
@@ -37,7 +37,7 @@
                 <div id="container" >
                     <div id="header">
                         <div id="logo"></div>
-                        <div id="key_visual"><img alt="" class="style1" src="Images/Captura.JPG" /></div>
+                        <div id="key_visual"><img alt="" class="style1" src="Images/Captura.jpg" /></div>
                     </div>
                     <div id="main_container">
                         <table id="layout_table">
@@ -85,8 +85,9 @@
                                                         <asp:DropDownList ID="ddl_proyecto" runat="server" Width="142px">
                                                             <asp:ListItem Value="1">PRM V</asp:ListItem>
                                                             <asp:ListItem Value="2">PRM VI</asp:ListItem>
-                                                            <asp:ListItem Selected="True" Value="3">PRM VIII</asp:ListItem>
+                                                            <asp:ListItem Value="3">PRM VIII</asp:ListItem>
                                                             <asp:ListItem  Value="7">PRM VII</asp:ListItem>
+                                                            <asp:ListItem Selected="True" Value="4">PRM IX</asp:ListItem>
                                                         </asp:DropDownList></td>
                                                 </tr>
                                                 <tr>
@@ -105,7 +106,7 @@
                         </table>
                     </div>
                     <div id="footer_text">
-                        SAFIRD : Manejo Administrativo, Presupuestal y Financiero.</div>
+                        BLUMONT SAF : Manejo Administrativo, Presupuestal y Financiero.</div>
                 </div>
             </td>
         </tr>
